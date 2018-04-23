@@ -36,6 +36,9 @@
 ;; auto insert closing bracket
 ;; (electric-pair-mode 1)
 
+(add-hook 'java-mode-hook (lambda ()
+														(setq c-basic-offset 2)))
+
 ;; Export env variable to EMACS
 (getenv "PATH")
 
