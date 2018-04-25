@@ -36,8 +36,13 @@
 ;; auto insert closing bracket
 ;; (electric-pair-mode 1)
 
+;; Set identention offset for java-mode
 (add-hook 'java-mode-hook (lambda ()
 														(setq c-basic-offset 2)))
+
+;; Hilight function call in c-mode
+;; (font-lock-add-keywords 'c-mode
+;; 												'(("\\<\\([a-zA-Z_]*\\) *("  1 c-annotation-face)))
 
 ;; Export env variable to EMACS
 (getenv "PATH")
@@ -103,7 +108,7 @@
 (global-whitespace-mode 1)
 
 ;; Load Atom theme as default
-(load-theme 'atom-one-dark t)
+(load-theme 'dracula t)
 
 ;; Golang configs
 ;; (require 'go-autocomplete)
