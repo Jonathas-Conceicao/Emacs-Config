@@ -36,13 +36,26 @@
 ;; auto insert closing bracket
 ;; (electric-pair-mode 1)
 
+;; Face to hilight function calls in dracula-theme
+;; (defface font-lock-function-call-face
+;; 	'((t :foreground "#50fa7b"
+;; 			 :weight bold
+;; 			 ))
+;; 	"Face for function calls."
+;; 	:group 'my-lang-mode )
+
 ;; Set identention offset for java-mode
 (add-hook 'java-mode-hook (lambda ()
 														(setq c-basic-offset 2)))
 
-;; Hilight function call in c-mode
-;; (font-lock-add-keywords 'c-mode
-;; 												'(("\\<\\([a-zA-Z_]*\\) *("  1 c-annotation-face)))
+;; Some extra hilight for C derivated modes
+(add-hook 'c-mode-hook (lambda()
+												 (font-lock-add-keywords 'c-mode ;; Function call
+																								 '(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
+																										(1 font-lock-function-name-face)
+																										))
+																								 t)
+												 ))
 
 ;; Export env variable to EMACS
 (getenv "PATH")
@@ -107,7 +120,8 @@
 (set-face-attribute 'whitespace-newline nil :background nil :foreground "gray40")
 (global-whitespace-mode 1)
 
-;; Load Atom theme as default
+;; The default theme
+(require 'dracula-theme)
 (load-theme 'dracula t)
 
 ;; Golang configs
@@ -152,6 +166,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+	 (quote
+		("eecacf3fb8efc90e6f7478f6143fd168342bbfa261654a754c7d47761cec07c8" default)))
  '(package-selected-packages
 	 (quote
 		(markdown-mode wakatime-mode powerline highlight-symbol haskell-mode go-mode git-gutter flyspell-correct atom-one-dark-theme))))
