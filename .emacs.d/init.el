@@ -158,7 +158,14 @@
 (require 'git-gutter)
 (global-git-gutter-mode +1)
 
-(custom-set-variables '(wakatime-api-key "38377444-781c-4473-994e-1a3fca37ac3c"))
+;; Emacs Statistic mode
+(require 'ess-site)
+
+;; Change code style
+(setq ess-default-style 'GNU)
+;; To go back to default style
+;; (setq ess-default-style 'DEFAULT)
+
 (setq wakatime-api-key "38377444-781c-4473-994e-1a3fca37ac3c")
 (global-wakatime-mode)
 
