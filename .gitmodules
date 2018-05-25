@@ -1,0 +1,3 @@
+[submodule ".emacs.d/packages-extras/godot-gdscript.el"]
+	path = .emacs.d/packages-extras/godot-gdscript.el
+	url = https://github.com/francogarcia/godot-gdscript.el.git

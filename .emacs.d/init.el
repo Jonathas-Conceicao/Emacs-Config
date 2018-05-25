@@ -166,6 +166,11 @@
 ;; To go back to default style
 ;; (setq ess-default-style 'DEFAULT)
 
+;; Manually installed packages
+;; godot-gdscript
+(add-to-list 'load-path "~/.emacs.d/packages-extras/godot-gdscript.el/")
+(require 'godot-gdscript)
+
 (setq wakatime-api-key "38377444-781c-4473-994e-1a3fca37ac3c")
 (global-wakatime-mode)
 
