@@ -45,17 +45,24 @@
 ;; 	:group 'my-lang-mode )
 
 ;; Set identention offset for java-mode
-(add-hook 'java-mode-hook (lambda ()
-														(setq c-basic-offset 2)))
+(add-hook
+ 'java-mode-hook
+ (lambda ()
+	 (setq c-basic-offset 2)
+	 )
+ )
 
 ;; Some extra hilight for C derivated modes
-(add-hook 'c-mode-hook (lambda()
-												 (font-lock-add-keywords 'c-mode ;; Function call
-																								 '(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
-																										(1 font-lock-function-name-face)
-																										))
-																								 t)
-												 ))
+(add-hook
+ 'c-mode-hook
+ (lambda()
+	 (font-lock-add-keywords 'c-mode ;; Function call
+													 '(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
+															(1 font-lock-function-name-face)
+															))
+													 t)
+	 )
+ )
 
 ;; Export env variable to EMACS
 (getenv "PATH")
@@ -170,6 +177,14 @@
 ;; godot-gdscript
 (add-to-list 'load-path "~/.emacs.d/packages-extras/godot-gdscript.el/")
 (require 'godot-gdscript)
+(add-hook 'godot-gdscript-mode-hook
+ (lambda ()
+	 (setq-local godot-gdscript-indent-guess-indent-offset nil)
+	 (setq-local godot-gdscript-indent-offset 4)
+	 (setq-local tab-width 4)
+	 (setq-local indent-tabs-mode t)
+	 )
+ )
 
 (setq wakatime-api-key "38377444-781c-4473-994e-1a3fca37ac3c")
 (global-wakatime-mode)
