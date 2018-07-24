@@ -183,6 +183,10 @@
 	)
 
 ;; Manually installed packages
+;; Javacc-mode
+(add-to-list 'load-path "~/.emacs.d/packages-extras/")
+(when (require 'javacc-mode nil :noerror)
+	)
 ;; godot-gdscript
 (add-to-list 'load-path "~/.emacs.d/packages-extras/godot-gdscript.el/")
 (when (require 'godot-gdscript nil :noerror)
