@@ -52,6 +52,28 @@
 	 )
  )
 
+;; add hook for shell-mode
+(add-hook
+ 'shell-mode-hook
+ (lambda ()
+	 (lambda ()
+		 (setq-local sh-identation 2)
+		 (setq-local tab-width 2)
+		 (setq-local indent-tabs-mode t)
+		 )
+	 )
+ )
+
+;; add hook for Latex mode
+(add-hook
+ 'LaTeX-mode-hook
+ (lambda ()
+	 (lambda ()
+		 (setq indent-tabs-mode t)
+		 )
+	 )
+ )
+
 ;; Some extra hilight for C derivated modes
 (add-hook
  'c-mode-hook
@@ -63,6 +85,23 @@
 													 t)
 	 )
  )
+
+;; Define a new cmm-mode
+(define-derived-mode cmm-mode c-mode 
+	"cmm-mode" 
+	"A variant of C mode for edditing GHC's cmm (C--) files."
+	(setq indent-tabs-mode nil)
+	(setq c-basic-offset 4)
+	(setq tab-width 4)
+	(font-lock-add-keywords 'cmm-mode ;; Function call
+													'(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
+														 (1 font-lock-function-name-face)
+														 ))
+													t)
+	)
+
+;; Set cmm files to use cmm mode by default
+(add-to-list 'auto-mode-alist '("\\.cmm\\'" . cmm-mode))
 
 ;; Export env variable to EMACS
 (getenv "PATH")
