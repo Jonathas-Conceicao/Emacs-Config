@@ -215,7 +215,7 @@
 		("eecacf3fb8efc90e6f7478f6143fd168342bbfa261654a754c7d47761cec07c8" default)))
  '(package-selected-packages
 	 (quote
-		(markdown-mode wakatime-mode powerline highlight-symbol haskell-mode go-mode git-gutter flyspell-correct atom-one-dark-theme))))
+		(opencl-mode markdown-mode wakatime-mode powerline highlight-symbol haskell-mode go-mode git-gutter flyspell-correct atom-one-dark-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
