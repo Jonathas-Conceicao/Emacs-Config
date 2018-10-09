@@ -57,7 +57,7 @@
  'shell-mode-hook
  (lambda ()
 	 (lambda ()
-		 (setq-local sh-identation 2)
+		 (setq-local sh-basic-offset 2)
 		 (setq-local tab-width 2)
 		 (setq-local indent-tabs-mode t)
 		 )
@@ -261,3 +261,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)
