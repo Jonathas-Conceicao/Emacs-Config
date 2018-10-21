@@ -9,7 +9,7 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/saves")))
 
 ;; Display line on buffers
-(global-linum-mode t)
+(global-display-line-numbers-mode t)
 
 ;; Disable bars in GUI
 (menu-bar-mode -1)
