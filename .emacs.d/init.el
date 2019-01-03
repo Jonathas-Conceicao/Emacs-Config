@@ -8,200 +8,39 @@
 ;; Set backup directory
 (setq backup-directory-alist `(("." . "~/.emacs.d/saves")))
 
-;; Display line on buffers
-(global-display-line-numbers-mode t)
+;; ========= GENERAL EDITOR CONFIG =========
 
-;; Disable bars in GUI
+(global-display-line-numbers-mode t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-
-;; turn on highlighting current line
 (global-hl-line-mode 1)
-
-;; turn on bracket match highlight
 (show-paren-mode 1)
-
-;; highlight brackets
-(setq show-paren-style 'parenthesis)
-
-;; show cursor position within line
 (column-number-mode 1)
-
-;; save minibuffer history
 (savehist-mode 1)
-
 ;; auto insert closing bracket
 (electric-pair-mode t)
-
-;; Defalt tabs and offset spaces
-(setq-default c-offset 2)
-(setq-default c-basic-offset 2)
-(setq-default python-indent 2)
-(setq-default sh-basic-offset 2)
-(setq-default tab-width 2)
-(setq-default indent-tabs-mode t)
-
-;; Some extra hilight for C derivated modes
-(add-hook
- 'c-mode-hook
- (lambda()
-	 (font-lock-add-keywords 'c-mode ;; Function call
-													 '(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
-															(1 font-lock-function-name-face)
-															))
-													 t)
-	 )
- )
-
-;; cmm-mode for ghc's cmm
-(define-derived-mode cmm-mode c-mode 
-	"cmm-mode" 
-	"A variant of C mode for edditing GHC's cmm (C--) files."
-	(setq indent-tabs-mode nil)
-	(setq c-basic-offset 4)
-	(setq tab-width 4)
-	(font-lock-add-keywords 'cmm-mode ;; Function call
-													'(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
-														 (1 font-lock-function-name-face)
-														 ))
-													t)
-	)
-
-;; Set cmm files to use cmm mode by default
-(add-to-list 'auto-mode-alist '("\\.cmm\\'" . cmm-mode))
-
-;; Export env variable to EMACS
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 (getenv "PATH")
 
-(defun move-line (n)
-	"Move the current line up or down by N lines."
-	(interactive "p")
-	(setq col (current-column))
-	(beginning-of-line) (setq start (point))
-	(end-of-line) (forward-char) (setq end (point))
-	(let ((line-text (delete-and-extract-region start end)))
-		(forward-line n)
-		(insert line-text)
-		;; restore point to original column in moved line
-		(forward-line -1)
-		(forward-char col)))
-
-(defun move-line-up (n)
-	"Move the current line up by N lines."
-	(interactive "p")
-	(move-line (if (null n) -1 (- n))))
-
-(defun move-line-down (n)
-	"Move the current line down by N lines."
-	(interactive "p")
-	(move-line (if (null n) 1 n)))
-
-;; My personal Key Bindings
-(global-set-key (kbd "<C-tab>") 'buffer-menu) ;; Buffer Menu
-(global-set-key "\C-x\C-d" "\C-a\C- \C-n\M-w\C-y") ;; Duplicate line
-
-(global-set-key (kbd "M-<up>") 'move-line-up)
-(global-set-key (kbd "M-<down>") 'move-line-down)
-
-;; Habilitar acentos ortográficos
-(set-keyboard-coding-system 'utf-8)
-(when (require 'iso-transl nil :noerror) )
-
-(when (require 'whitespace nil :noerror)
-	(setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark )))
-	(setq whitespace-display-mappings
-				;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
-				'((space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
-					(newline-mark 10 [172 10]) ; LINE FEED,
-					(tab-mark 9 [124 9] [124 9]) ; tab
-					)
-				)
-	(set-face-attribute 'whitespace-space nil :background nil :foreground "gray40")
-	(set-face-attribute 'whitespace-tab nil :background nil :foreground "gray40")
-	(set-face-attribute 'whitespace-newline nil :background nil :foreground "gray40")
-	(global-whitespace-mode t)
-	)
-
-;; The default theme
-(when (require 'dracula-theme nil :noerror)
-	(load-theme 'dracula t)
-	)
-
-;; Runs go fmt after save
-(add-hook 'before-save-hook #'gofmt-before-save)
-
-;; Setup for highlight-symbol
-(when (require 'highlight-symbol nil :noerror)
-	(global-set-key [f3] 'highlight-symbol)
-	(global-set-key [(control f3)] 'highlight-symbol-next)
-	(global-set-key [(shift f3)] 'highlight-symbol-prev)
-	(global-set-key [(meta f3)] 'highlight-symbol-query-replace)
-	)
-
-;; Enables flyspell
-(when (require 'flyspell nil :noerror)
-	;; Avoid flyspell slowdown
-	(setq flyspell-issue-message-flag nil)
-
-	;; Flyspell for latex
-	(add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
-	)
-
-;; Enables auto complete
-;; (ac-config-default)
-
-;; Enables powerline with default profile
-(when (require 'powerline nil :noerror)
-	(powerline-default-theme)
-	)
-
-(when (require 'git-gutter nil :noerror)
-	(global-git-gutter-mode +1)
-	)
-
-;; Emacs Statistic mode
-(when (require 'ess-site nil :noerror)
-
-	;; Change code style
-	(setq ess-default-style 'GNU)
-
-	;; To go back to default style
-	;; (setq ess-default-style 'DEFAULT)
-	)
-
-;; Manually installed packages
-;; Javacc-mode
-(add-to-list 'load-path "~/.emacs.d/packages-extras/")
-(when (require 'javacc-mode nil :noerror)
-	)
-;; godot-gdscript
-(add-to-list 'load-path "~/.emacs.d/packages-extras/godot-gdscript.el/")
-(when (require 'godot-gdscript nil :noerror)
-	(add-hook 'godot-gdscript-mode-hook
-						(lambda ()
-							(setq-local godot-gdscript-indent-guess-indent-offset nil)
-							(setq-local godot-gdscript-indent-offset 4)
-							(setq-local tab-width 4)
-							(setq-local indent-tabs-mode t)
-							)
-						)
-	)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-	 (quote
-		("eecacf3fb8efc90e6f7478f6143fd168342bbfa261654a754c7d47761cec07c8" default)))
- '(package-selected-packages
-	 (quote
-		(opencl-mode markdown-mode wakatime-mode powerline highlight-symbol haskell-mode go-mode git-gutter flyspell-correct atom-one-dark-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+(setq
+ show-paren-style 'parenthesis
+ inhibit-startup-message t
+ x-select-enable-primary t
  )
-(put 'upcase-region 'disabled nil)
+(setq-default
+ c-offset 2
+ c-basic-offset 2
+ python-indent 2
+ sh-basic-offset 2
+ tab-width 2
+ indent-tabs-mode t
+ )
+
+;;  ========= EXTRA CONFIG =========
+(load (expand-file-name "util.el" user-emacs-directory))
+(load (expand-file-name "packages-config.el" user-emacs-directory))
+
+;; Keep emacs Custom-settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
