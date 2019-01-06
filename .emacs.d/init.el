@@ -26,7 +26,6 @@
 (setq
  show-paren-style 'parenthesis
  inhibit-startup-message t
- x-select-enable-primary t
  )
 (setq-default
  c-offset 2
