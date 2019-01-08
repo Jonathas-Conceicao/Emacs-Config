@@ -29,6 +29,11 @@
 	(add-hook 'before-save-hook #'gofmt-before-save)
 	)
 
+;; Runs cargo fmt after save
+(when (require 'rust-mode nil :noerror)
+	(setq rust-format-on-save t)
+	)
+
 ;; Setup for highlight-symbol
 (when (require 'highlight-symbol nil :noerror)
 	(global-set-key [f3] 'highlight-symbol)
