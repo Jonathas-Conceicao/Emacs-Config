@@ -34,6 +34,8 @@
  sh-basic-offset 2
  tab-width 2
  indent-tabs-mode t
+
+ vc-follow-symlinks t
  )
 
 ;;  ========= EXTRA CONFIG =========
