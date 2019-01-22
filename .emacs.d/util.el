@@ -56,7 +56,7 @@
 
 ;; ========= KEY BINDINGS =========
 
-(global-set-key (kbd "<C-tab>") 'buffer-menu) ;; Buffer Menu
+(global-set-key (kbd "<C-tab>") 'ibuffer) ;; Buffer Menu
 (global-set-key "\C-x\C-d" "\C-a\C- \C-n\M-w\C-y") ;; Duplicate line
 
 (global-set-key (kbd "M-<up>") 'move-line-up)
