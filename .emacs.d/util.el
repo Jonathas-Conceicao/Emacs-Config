@@ -23,6 +23,18 @@
 	(interactive "p")
 	(move-line (if (null n) 1 n)))
 
+;; Function to format C/C++ code with GNU indent
+(defun c-auto-format ()
+	"Function to format C/C++ code with GNU indent"
+	(interactive)
+	(when (find major-mode '(c-formated-mode))
+		(shell-command
+		 (format "indent %s %s" (shell-quote-argument (buffer-file-name)) gnu-indent-config))
+		(revert-buffer t t t)))
+;; My GNU's indent config for C code
+(setq gnu-indent-config "-linux -ut -ts2 -i2 -brf")
+
+
 ;; ========= DERIVED MODES =========
 
 ;; cmm-mode for ghc's cmm
@@ -39,6 +51,17 @@
 													t)
 	)
 (add-to-list 'auto-mode-alist '("\\.cmm\\'" . cmm-mode))
+
+(define-derived-mode c-formated-mode c-mode
+	"Formated C"
+	"C that runs GNU's indent on save"
+	(add-hook 'after-save-hook 'c-auto-format)
+	(font-lock-add-keywords 'c-formated-mode ;; Function call
+													'(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
+														 (1 font-lock-function-name-face)
+														 ))
+													t)
+	)
 
 ;; ========= LANGUAGE HOOKS =========
 
