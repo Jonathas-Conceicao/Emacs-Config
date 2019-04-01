@@ -32,8 +32,7 @@
 		 (format "indent %s %s" (shell-quote-argument (buffer-file-name)) gnu-indent-config))
 		(revert-buffer t t t)))
 ;; My GNU's indent config for C code
-(setq gnu-indent-config "-linux -ut -ts2 -i2 -brf")
-
+(setq gnu-indent-config "-linux -ut -ts2 -i2 -brf -bc")
 
 ;; ========= DERIVED MODES =========
 
