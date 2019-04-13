@@ -73,6 +73,9 @@
 	;; (setq ess-default-style 'DEFAULT)
 	)
 
+;; String Inflection for case change
+(when (require 'string-inflection nil :noerror))
+
 ;;  ========= MANUALLY INSTALLED PACKAGES =========
 
 ;; Javacc-mode
