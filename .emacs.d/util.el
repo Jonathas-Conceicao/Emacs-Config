@@ -81,5 +81,14 @@
 (global-set-key (kbd "<C-tab>") 'ibuffer) ;; Buffer Menu
 (global-set-key "\C-x\C-d" "\C-a\C- \C-n\M-w\C-y") ;; Duplicate line
 
-(global-set-key (kbd "M-<up>") 'move-line-up)
-(global-set-key (kbd "M-<down>") 'move-line-down)
+(bind-keys
+ ("M-<up>" . move-line-up)
+ ("M-<down>" . move-line-down)
+ )
+
+(bind-keys
+ :map global-map
+ :prefix-map ctl-z-map
+ :prefix "C-z"
+ ("i" . ispell-region)
+ )

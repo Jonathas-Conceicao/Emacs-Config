@@ -39,6 +39,10 @@
  )
 
 ;;  ========= EXTRA CONFIG =========
+
+;; Create prefix command to be used with C-z as prefix key
+(define-prefix-command 'ctl-z-map)
+
 (load (expand-file-name "util.el" user-emacs-directory))
 (load (expand-file-name "packages-config.el" user-emacs-directory))
 
