@@ -78,6 +78,12 @@
 
 ;; ========= KEY BINDINGS =========
 
+;; Remap of some keys GNU default keys
+(bind-keys
+ ("C-s" . isearch-forward-regexp)
+ ("C-r" . isearch-backward-regexp)
+ )
+
 (global-set-key (kbd "<C-tab>") 'ibuffer) ;; Buffer Menu
 (global-set-key "\C-x\C-d" "\C-a\C- \C-n\M-w\C-y") ;; Duplicate line
 
