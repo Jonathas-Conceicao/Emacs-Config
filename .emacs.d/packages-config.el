@@ -1,7 +1,6 @@
 ;;  ========= PACKAGES INIT =========
 
 (eval-when-compile
-	(add-to-list 'load-path "~/.emacs.d/use-package-*/")
 	(require 'use-package))
 
 ;; The default theme
@@ -100,6 +99,10 @@
 	 ("C-z C" . string-inflection-camelcase)
 	 )
 	)
+
+(use-package undo-tree
+	:init
+	(global-undo-tree-mode))
 
 ;;  ========= MANUALLY INSTALLED PACKAGES =========
 
