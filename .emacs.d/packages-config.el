@@ -102,7 +102,12 @@
 
 (use-package undo-tree
 	:init
-	(global-undo-tree-mode))
+	(global-undo-tree-mode)
+	:bind
+	(
+	 ("M-/" . undo-tree-redo)
+	 )
+	)
 
 ;;  ========= MANUALLY INSTALLED PACKAGES =========
 
