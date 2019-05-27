@@ -23,7 +23,31 @@
 	(interactive "p")
 	(move-line (if (null n) 1 n)))
 
-;; Function to format C/C++ code with GNU indent
+(defun duplicate-line ()
+	"Duplicate current line and move down"
+	(interactive)
+	(move-beginning-of-line 1)
+	(let ((beg (point)))
+		(forward-line 1)
+		(kill-ring-save beg (point))
+		)
+	(yank)
+	)
+
+;; Code from: https://www.emacswiki.org/emacs/TabCompletion
+(defun indent-or-complete ()
+	"Complete if point is at end of a word, otherwise indent line."
+	(interactive)
+	(if (string-match "Minibuf" (buffer-name))
+			(unless (minibuffer-complete)
+				(dabbrev-expand nil))
+		(if mark-active
+				(indent-region (region-beginning)
+											 (region-end))
+			(if (looking-at "\\>")
+					(dabbrev-expand nil)
+				(indent-for-tab-command)))))
+
 (defun c-auto-format ()
 	"Function to format C/C++ code with GNU indent"
 	(interactive)
@@ -84,14 +108,19 @@
  ("C-r" . isearch-backward-regexp)
  )
 
-(global-set-key (kbd "<C-tab>") 'ibuffer) ;; Buffer Menu
-(global-set-key "\C-x\C-d" "\C-a\C- \C-n\M-w\C-y") ;; Duplicate line
-
+;; General key binds
 (bind-keys
+ ("C-<tab>" . ibuffer)
+
  ("M-<up>" . move-line-up)
  ("M-<down>" . move-line-down)
+
+ ("<tab>" . indent-or-complete)
+
+ ("C-x C-d" . duplicate-line)
  )
 
+;; My prefixed keys
 (bind-keys
  :map global-map
  :prefix-map ctl-z-map
