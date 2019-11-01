@@ -113,23 +113,3 @@
 (use-package yaml-mode
 	:config (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 	)
-
-;;  ========= MANUALLY INSTALLED PACKAGES =========
-
-;; Javacc-mode
-(add-to-list 'load-path "~/.emacs.d/packages-extras/")
-(use-package javacc-mode)
-
-;; godot-gdscript
-(add-to-list 'load-path "~/.emacs.d/packages-extras/godot-gdscript.el/")
-(use-package godot-gdscript
-	:config
-	(add-hook 'godot-gdscript-mode-hook
-						(lambda ()
-							(setq-local godot-gdscript-indent-guess-indent-offset nil)
-							(setq-local godot-gdscript-indent-offset 4)
-							(setq-local tab-width 4)
-							(setq-local indent-tabs-mode t)
-							)
-						)
-	)
