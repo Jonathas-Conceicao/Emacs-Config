@@ -1,4 +1,4 @@
-(require 'package) 
+(require 'package)
 ;; Package Repositories
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
@@ -37,6 +37,40 @@
  vc-follow-symlinks t
  )
 
+;; ========= INSTALL DEPENDENCIES =========
+
+(defun install-dependencies ()
+	"Install extensions if they're missing"
+	(dolist (package '(
+										 bind-key
+										 dracula-theme
+										 ess
+										 flyspell-correct
+										 git-gutter
+										 go-mode
+										 haskell-mode
+										 highlight-symbol
+										 markdown-mode
+										 powerline
+										 rust-mode
+										 spacemacs-theme
+										 string-inflection
+										 undo-tree
+										 use-package
+										 yaml-mode
+										 )
+									 )
+		(package-install package)
+		)
+	)
+
+(condition-case nil (install-dependencies)
+	(error
+	 (package-refresh-contents)
+	 (install-dependencies)
+	 )
+	)
+
 ;;  ========= EXTRA CONFIG =========
 
 ;; Create prefix command to be used with C-z as prefix key
@@ -46,5 +80,5 @@
 (load (expand-file-name "packages-config.el" user-emacs-directory))
 
 ;; Keep emacs Custom-settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

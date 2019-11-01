@@ -2,3 +2,5 @@
 .emacs.d/auto-save-list/*
 .emacs.d/history
 .emacs.d/saves/*
+.emacs.d/elpa
+.emacs.d/custom.el
