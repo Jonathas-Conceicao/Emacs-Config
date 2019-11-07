@@ -83,6 +83,7 @@
 
 ;; Emacs Statistic mode
 (use-package ess-site
+	:no-require t
 	:config
 	;; Change code style
 	(setq ess-default-style 'GNU)
