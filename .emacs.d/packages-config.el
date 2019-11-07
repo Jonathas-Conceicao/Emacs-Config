@@ -36,9 +36,12 @@
 	:config (add-hook 'before-save-hook #'gofmt-before-save)
 	)
 
-;; Runs cargo fmt after save
 (use-package rust-mode
-	:config (setq rust-format-on-save t)
+	:config
+	(progn
+		(setq-local rust-format-on-save t)
+		(setq-local indent-tabs-mode nil)
+		)
 	)
 
 
