@@ -9,7 +9,10 @@
 
 ;; ========= GENERAL EDITOR CONFIG =========
 
-(global-display-line-numbers-mode t)
+(if (version<= "26.0.50" emacs-version)
+		(global-display-line-numbers-mode)
+	(global-linum-mode)
+	)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (global-hl-line-mode 1)
