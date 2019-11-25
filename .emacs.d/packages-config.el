@@ -38,10 +38,8 @@
 
 (use-package rust-mode
 	:config
-	(progn
-		(setq-local rust-format-on-save t)
-		(setq-local indent-tabs-mode nil)
-		)
+	(setq-local rust-format-on-save t)
+	(setq-local indent-tabs-mode nil)
 	)
 
 
@@ -81,6 +79,8 @@
 	(
 	 ("C-z u" . git-gutter:update-all-windows)
 	 ("C-z r" . git-gutter:revert-hunk)
+	 ("C-z n" . git-gutter:next-hunk)
+	 ("C-z p" . git-gutter:previous-hunk)
 	 )
 	)
 

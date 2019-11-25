@@ -105,7 +105,11 @@
 ;; Remap of some keys GNU default keys
 (bind-keys
  ("C-s" . isearch-forward-regexp)
+ ("C-S-s" . isearch-forward)
  ("C-r" . isearch-backward-regexp)
+ ("C-S-r" . isearch-backward)
+ ("C-h" . delete-backward-char)
+ ("M-h" . backward-kill-word)
  )
 
 ;; General key binds
@@ -126,4 +130,5 @@
  :prefix-map ctl-z-map
  :prefix "C-z"
  ("i" . ispell-region)
+ ("C-r" . revert-buffer)
  )
