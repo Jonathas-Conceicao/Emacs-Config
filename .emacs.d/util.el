@@ -34,13 +34,11 @@
 	(yank)
 	)
 
-;; Code from: https://www.emacswiki.org/emacs/TabCompletion
 (defun indent-or-complete ()
 	"Complete if point is at end of a word, otherwise indent line."
 	(interactive)
 	(if (string-match "Minibuf" (buffer-name))
-			(unless (minibuffer-complete)
-				(dabbrev-expand nil))
+			(minibuffer-complete)
 		(if mark-active
 				(indent-region (region-beginning)
 											 (region-end))
