@@ -40,6 +40,8 @@
  vc-follow-symlinks t
  )
 
+(prefer-coding-system 'utf-8)
+
 ;; ========= INSTALL DEPENDENCIES =========
 
 (defun install-dependencies ()
