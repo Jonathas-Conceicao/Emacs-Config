@@ -38,8 +38,8 @@
 
 (use-package rust-mode
 	:config
-	(setq-local rust-format-on-save t)
-	(setq-local indent-tabs-mode nil)
+	(setq-default rust-format-on-save t)
+	(setq-default indent-tabs-mode nil)
 	)
 
 
