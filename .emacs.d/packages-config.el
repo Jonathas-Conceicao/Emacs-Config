@@ -31,6 +31,33 @@
 		)
 	)
 
+(use-package yasnippet
+	:config
+	(progn
+
+		;; Inspired by: https://emacs.stackexchange.com/questions/26271/
+		(defvar-local yas--expandable-keys-overlay nil)
+		(defun yas-show-expand-keys ()
+			;; Put overlay on text which is an expandable snippet key.
+			(let ((keys-at-point (and yas-minor-mode (yas--templates-for-key-at-point)))
+						(have-overlay (overlayp (buffer-local-value 'yas--expandable-keys-overlay (current-buffer)))))
+				(if keys-at-point
+						(let ((beg (nth 1 keys-at-point))
+									(end (nth 2 keys-at-point)))
+							(if have-overlay
+									(move-overlay yas--expandable-keys-overlay beg end)
+								(setq-local yas--expandable-keys-overlay
+														(make-overlay beg end)))
+							(overlay-put yas--expandable-keys-overlay 'face '(:box t)))
+					(when have-overlay
+						(delete-overlay yas--expandable-keys-overlay)))))
+		(add-hook 'post-command-hook #'yas-show-expand-keys)
+
+
+		(yas-global-mode t)
+		)
+	)
+
 ;; Runs go fmt after save
 (use-package go-mode
 	:config (add-hook 'before-save-hook #'gofmt-before-save)

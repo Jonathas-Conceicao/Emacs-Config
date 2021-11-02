@@ -63,6 +63,8 @@
 										 undo-tree
 										 use-package
 										 yaml-mode
+										 yasnippet
+										 yasnippet-snippets
 										 )
 									 )
 		(package-install package)

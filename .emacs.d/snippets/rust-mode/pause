@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: read line from user for pausing execution
+# key: pause
+# --
+let _ = std::io::stdin().read_line(&mut String::default());$1
