@@ -117,3 +117,24 @@
 (use-package yaml-mode
 	:config (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 	)
+
+(use-package org
+  :config
+  (progn
+    ;; Allow evaulation of the following source blocks in Org-Mode
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (haskell . t)
+       (shell . t)
+       (R . t)
+       (python . t)
+       (C . t)
+       (java . t)
+       )
+     )
+
+    ;; Run any code block without confirmation
+    (setq org-confirm-babel-evaluate 'nil)
+    )
+  )
