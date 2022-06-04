@@ -52,6 +52,7 @@
 	(dolist (package '(
 										 bind-key
 										 dracula-theme
+										 diminish
 										 ess
 										 flyspell-correct
 										 git-gutter
@@ -59,7 +60,11 @@
 										 haskell-mode
 										 highlight-symbol
 										 markdown-mode
+										 ormolu
 										 powerline
+										 projectile
+										 lsp-metals
+										 lsp-mode
 										 rust-mode
 										 spacemacs-theme
 										 string-inflection

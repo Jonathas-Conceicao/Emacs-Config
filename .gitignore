@@ -1,6 +1,15 @@
-*~
 .emacs.d/auto-save-list/*
 .emacs.d/history
 .emacs.d/saves/*
 .emacs.d/elpa
 .emacs.d/custom.el
+
+# Emacs swap files
+.\#*
+\#*
+*.~*
+
+.dap-breakpoints
+.lsp-session-v1
+projectile-bookmarks.eld
+projectile.cache

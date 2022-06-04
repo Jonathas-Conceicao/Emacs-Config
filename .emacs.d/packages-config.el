@@ -14,6 +14,7 @@
 	)
 
 (use-package whitespace
+	:diminish global-whitespace-mode
 	:config
 	(progn
 		(setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark )))
@@ -32,6 +33,7 @@
 	)
 
 (use-package yasnippet
+	:diminish yas-minor-mode
 	:config
 	(progn
 
@@ -101,6 +103,7 @@
 	)
 
 (use-package git-gutter
+	:diminish git-gutter-mode
 	:config (global-git-gutter-mode +1)
 	:bind
 	(
@@ -132,6 +135,7 @@
 	)
 
 (use-package undo-tree
+	:diminish undo-tree-mode
 	:init
 	(global-undo-tree-mode)
 	:bind
@@ -165,3 +169,39 @@
     (setq org-confirm-babel-evaluate 'nil)
     )
   )
+
+(use-package projectile
+  :diminish projectile-mode
+  :bind-keymap ("C-c C-p" . projectile-command-map)
+  :hook (after-init . projectile-mode)
+  :config
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when (file-remote-p default-directory)
+                (setq-local projectile-mode-line "Projectile")
+                )
+              )
+            )
+  ;; (add-to-list 'projectile-globally-ignored-directories "build_*")
+  )
+
+(use-package lsp-mode
+  :diminish lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :commands lsp)
+
+(use-package lsp-metals
+  :ensure t
+  ;; :custom
+  ;; ;; Metals claims to support range formatting by default but it supports range
+  ;; ;; formatting of multiline strings only. You might want to disable it so that
+  ;; ;; emacs can use indentation provided by scala-mode.
+  ;; (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
+  :hook (scala-mode . lsp)
+  :bind
+  (("C-c f" . lsp-format-region)
+   ("C-c C-f" . lsp-format-buffer)
+   ("C-c C-g" . lsp-find-definition)
+   )
+)
