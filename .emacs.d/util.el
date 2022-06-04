@@ -56,6 +56,12 @@
 ;; My GNU's indent config for C code
 (setq gnu-indent-config "-linux -ut -ts2 -i2 -brf -bc")
 
+(defun other-window-backward ()
+  "Goto previous window"
+  (interactive)
+  (other-window -1)
+  )
+
 ;; ========= DERIVED MODES =========
 
 ;; cmm-mode for ghc's cmm
@@ -117,9 +123,8 @@
  ("M-<up>" . move-line-up)
  ("M-<down>" . move-line-down)
 
- ("<tab>" . indent-or-complete)
-
  ("C-x C-d" . duplicate-line)
+ ("C-x p" . other-window-backward)
  )
 
 ;; My prefixed keys
@@ -129,4 +134,6 @@
  :prefix "C-z"
  ("i" . ispell-region)
  ("C-r" . revert-buffer)
+ ("C-s" . sort-lines)
+ ("<tab>" . indent-or-complete)
  )

@@ -42,6 +42,9 @@
 
 (prefer-coding-system 'utf-8)
 
+;; ;; Sets default font size, value is 1/10pt
+;; (set-face-attribute 'default nil :height 140)
+
 ;; ========= INSTALL DEPENDENCIES =========
 
 (defun install-dependencies ()
