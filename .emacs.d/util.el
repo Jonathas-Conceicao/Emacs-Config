@@ -92,17 +92,17 @@
 
 ;; ========= LANGUAGE HOOKS =========
 
-;; Some extra hilight for C derivated modes
-(add-hook
- 'c-mode-hook
- (lambda()
-	 (font-lock-add-keywords 'c-mode ;; Function call
-													 '(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
-															(1 font-lock-function-name-face)
-															))
-													 t)
-	 )
- )
+;; ;; Some extra hilight for C derivated modes
+;; (add-hook
+;;  'c-mode-hook
+;;  (lambda()
+;; 	 (font-lock-add-keywords 'c-mode ;; Function call
+;; 													 '(("\\(\\(\\w\\|_\\)+\\(\\w\\|_\\|[0-9]\\)*\\)\\>\\s-*("
+;; 															(1 font-lock-function-name-face)
+;; 															))
+;; 													 t)
+;; 	 )
+;;  )
 
 ;; ========= KEY BINDINGS =========
 

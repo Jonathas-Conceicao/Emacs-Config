@@ -65,6 +65,7 @@
 										 projectile
 										 lsp-metals
 										 lsp-mode
+										 ob-async
 										 rust-mode
 										 spacemacs-theme
 										 string-inflection

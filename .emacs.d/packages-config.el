@@ -142,7 +142,12 @@
 	(
 	 ("M-/" . undo-tree-redo)
 	 )
+	:config
+	;; Save swap-files (*.~undo-tree~) on dotemacs dir
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 	)
+
+
 
 ;; Yaml mode
 (use-package yaml-mode
@@ -165,10 +170,14 @@
        )
      )
 
+    (setq org-startup-folded 'content)
     ;; Run any code block without confirmation
     (setq org-confirm-babel-evaluate 'nil)
     )
   )
+
+;; Add support for :async keyword for org source blocks
+(use-package ob-async)
 
 (use-package projectile
   :diminish projectile-mode
