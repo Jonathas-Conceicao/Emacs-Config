@@ -4,6 +4,12 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; Add support for "forked" packages on git dir
+;; (let (emacs-git "git/")
+;;   (mapc (lambda (x)
+;;           (add-to-list 'load-path (expand-file-name x emacs-git)))
+;;         (delete ".." (directory-files emacs-git))))
+
 ;; Set backup directory
 (setq backup-directory-alist `(("." . "~/.emacs.d/saves")))
 
@@ -63,17 +69,18 @@
 										 ormolu
 										 powerline
 										 projectile
-										 lsp-metals
-										 lsp-mode
 										 ob-async
 										 rust-mode
 										 spacemacs-theme
 										 string-inflection
 										 undo-tree
 										 use-package
+										 quelpa
+										 quelpa-use-package
 										 yaml-mode
 										 yasnippet
 										 yasnippet-snippets
+										 magit
 										 )
 									 )
 		(package-install package)

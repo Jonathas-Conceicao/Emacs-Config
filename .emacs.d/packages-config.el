@@ -3,6 +3,11 @@
 (eval-when-compile
 	(require 'use-package))
 
+(use-package quelpa
+	:config (setq quelpa-self-upgrade-p nil))
+
+(require 'quelpa-use-package)
+
 ;; The default theme
 (use-package dracula-theme
 	:config (load-theme 'dracula t)
@@ -194,23 +199,23 @@
   ;; (add-to-list 'projectile-globally-ignored-directories "build_*")
   )
 
-(use-package lsp-mode
-  :diminish lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :commands lsp)
+(use-package magit
+  :config
+  (require 'git-commit)
+  (add-hook 'git-commit-mode-hook 'flyspell-mode)
+  (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
+  (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
+  (setq magit-diff-refine-hunk t)
+  :bind ((("C-z g" . magit-file-dispatch))))
 
-(use-package lsp-metals
-  :ensure t
-  ;; :custom
-  ;; ;; Metals claims to support range formatting by default but it supports range
-  ;; ;; formatting of multiline strings only. You might want to disable it so that
-  ;; ;; emacs can use indentation provided by scala-mode.
-  ;; (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
-  :hook (scala-mode . lsp)
-  :bind
-  (("C-c f" . lsp-format-region)
-   ("C-c C-f" . lsp-format-buffer)
-   ("C-c C-g" . lsp-find-definition)
-   )
-)
+(use-package ansi-color
+	:config
+	(progn
+
+		;; Inspired by: https://stackoverflow.com/a/23382008
+		(defun display-ansi-colors ()
+			(interactive)
+			(let ((inhibit-read-only t))
+				(ansi-color-apply-on-region (point-min) (point-max))))
+		)
+	)
